@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load  static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static "css/master.css" %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" /> <!--load all styles -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.0.min.js"></script>
+    
+    <title>Confirmation</title>
+  </head>
+  <body>
+    <nav class="navbar fixed-top  navbar-expand-lg navbar-dark bg-dark">
+    </nav>
+    <div class="container content">
+      <div class="row d-flex justify-content-center mt-3 mb-1">
+        <h2>Device delete confirmation</h2>
+        <div class="container content">
+          <p>Are you sure you want to delete sensor {{item.UID}} ??</p>
+          <form action="{% url 'esp:deleteSensor' item.id %}" method="POST">
+            {% csrf_token %}
+
+              <a href="{% url 'esp:updateSensor' %}">Cancel</a>
+              <input type="submit" value="Confirm">
+          </form>
+        </div>
+      </div>
+      </div>
+  </body>
+</html>

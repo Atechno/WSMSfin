@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+{% load  static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static "css/master.css" %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" /> <!--load all styles -->
+    <title>Device Registration</title>
+  </head>
+  <body>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark mb-2">
+      <a class="navbar-brand" href="{% url 'esp:dashboard'%}"><i class="fas fa-home"></i> Dashboard</a>
+      <a href="{% url 'esp:logout' %}"class="ml-auto">
+        <button id="Logout"type="button" class="btn">Logout</button>
+      </a>
+    </nav>
+    <div class="container content">
+      <div class="row d-flex justify-content-center mt-5 mb-1">
+        <h2>{{ heading }}</h2>
+      </div>
+      <form action="" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="exampleFormControlInput1">UID:</label>
+          {{form.UID}}
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Sensor Type and Model:</label>
+          {{form.typeOfSensor}}
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Location of Sensor:</label>
+          {{form.location}}
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Set Minimum threshold:</label>
+          {{form.min_threshold}}
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Set Maximum threshold:</label>
+          {{form.max_threshold}}
+        </div>
+        <div class="form-group d-flex justify-content-center d-flex mt-1">
+          <input type="submit" name="ADD" value="{{ addOrupdate }}" class="btn">
+        </div>
+      </form>
+    </div>
+    <script>
+    
+    //Query All input fields
+    var form_fields = document.getElementsByTagName('input')
+    form_fields[1].placeholder='UID';
+    form_fields[3].placeholder='Minimum Threshold';
+    form_fields[4].placeholder='Maximum Threshold';
+    form_fields[2].placeholder='Location';
+    for (var field in form_fields){
+    form_fields[field].className += ' form-control'
+    }
+    var select_fields =  document.getElementsByTagName('select')
+    select_fields[0].className += ' form-control'
+    </script>
+  </body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% load  static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static "css/master.css" %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <nav class="navbar fixed-top  navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#"><i class="fas fa-home"></i> Dashboard</a>
+      <a href="{% url 'esp:logout' %}"class="ml-auto">
+        <button id="Logout"type="button" class="btn">
+        Logout
+        </button>
+      </a>
+    </nav>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">Welcome, {{firstname}}.</h1>
+        <p class="lead">You can register and monitor your new Sensor Devices here..</p>
+      </div>
+    </div>
+    <div class="container-fluid">
+      {%if messages%}
+      {% for message in messages %}
+        <div class=" row ">
+          <div class=" offset-sm-2 col-sm-8 d-flex flex-column justify-content-center mt-2 alert alert-danger" role="alert" >
+            {{ message }}
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+    <div class="row">
+      <div class=" offset-sm-2 col-sm-8 d-flex flex-column justify-content-center mt-2" > 
+        <a href="{% url 'esp:registerSensor'%}"><button type="button" class="btn btn-lg btn-block">Register New Sensor Device</button></a>
+      </div>
+    </div>
+    <div class="row">
+      <div class=" offset-sm-2 col-sm-8 d-flex flex-column justify-content-center mt-2" >
+      <a href="{% url 'esp:ShowData'%}"><button type="button" class="btn btn-lg btn-block">Monitor existing Sensors</button></a>
+    </div>
+    </div>
+    <div class="row ">
+      <div class=" offset-sm-2 col-sm-8 d-flex flex-column justify-content-center mt-2" >
+      <a href="{% url 'esp:updateSensor' %}"><button type="button" class="btn btn-lg btn-block">Modify existing Sensors</button></a>
+    </div>
+    </div>
+    
+    <!--
+    <div class="row justify-content-around">
+      <div class="col-4">
+        <button id="Reg" type="button" class="btn btn-primary btn-lg">Large button</button>
+      </div>
+      <div class="col-4">
+        <button id="Monitor" type="button" class="btn btn-secondary btn-lg">Large button</button>
+      </div>
+    </div> -->
+  </div>
+</body>
+</html>

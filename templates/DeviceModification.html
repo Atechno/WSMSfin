@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% load  static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static "css/master.css" %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" /> <!--load all styles -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.0.min.js"></script>
+    
+    <title>Device Modification</title>
+  </head>
+  <body>
+    <nav class="navbar fixed-top  navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="{% url 'esp:dashboard'%}"><i class="fas fa-home"></i> Dashboard</a>
+      <a href="{% url 'esp:logout' %}"class="ml-auto">
+        <button id="Logout"type="button" class="btn">Logout</button>
+      </a>
+    </nav>
+    <div class="container content">
+      <div class="row d-flex justify-content-center mt-3 mb-1">
+        <h2>Existing Device Modification</h2>
+      </div>
+      <table class="table table-sm">
+        <tr>
+          <th>UID</th>
+          <th>Type of Sensor</th>
+          <th>Location</th>
+          <th>Minimum threshold</th>
+          <th>Maximum threshold</th>
+          <th>Created on</th>
+          <th>Update</th>
+          <th>Remove</th>
+        </tr>
+        {% for data in sensorData %}
+          <tr>
+            <td>{{data.UID}}</td>
+            <td>{{data.typeOfSensor}}</td>
+            <td>{{data.location}}</td>
+            <td>{{data.min_threshold}}</td>
+            <td>{{data.max_threshold}}</td>
+            <td>{{data.date_created}}</td>
+            <td align="center"><a href="{% url 'esp:modifySensor' data.id %}"><i class="fas fa-pencil-alt"></i></a></td>
+            <td align="center"><a href="{% url 'esp:deleteSensor' data.id %}"><i class="fas fa-trash" style="color: red"></i></a></td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </body>
+</html>
